@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form validation</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #4d4946;
+        color: #fff;
+      }
+      form {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      form div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+      form div span {
+        align-self: start;
+        font-size: 14px;
+        color: #ff0000;
+        margin-top: 8px;
+      }
+      form button {
+        background-color: rgba(7, 176, 7, 0.3);
+        background-color: rgba(7, 176, 7, 1);
+        padding: 4px;
+      }
+      label {
+        align-self: start;
+        margin-bottom: 5px;
+      }
+      input {
+        width: 100%;
+        border-radius: 4px;
+      }
+      input._error {
+        border: 1px solid #ff0000;
+        box-shadow: 0 0 2px 2px #ff0000;
+      }
+      input._succsess {
+        border: 1px solid #07b307;
+        box-shadow: 0 0 2px 2px #07b307;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="#" class="form">
+      <div class="form__field">
+        <label for="name">Имя</label>
+        <input id="name" label="Имя" name="name" type="text" class="_req" />
+      </div>
+      <div class="form__field">
+        <label for="email">Электронная почта</label>
+        <input
+          id="email"
+          label="Электронная почта"
+          name="email"
+          type="text"
+          class="_req"
+        />
+      </div>
+      <div class="form__field">
+        <label for="password">Пароль</label>
+        <input
+          id="password"
+          label="Пароль"
+          name="password"
+          type="password"
+          class="_req"
+        />
+      </div>
+      <button class="form__button">Отправить</button>
+    </form>
+  </body>
+
+  <script src="./main.js"></script>
+</html>
