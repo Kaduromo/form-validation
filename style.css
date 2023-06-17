@@ -30,7 +30,6 @@ form {
   background-color: #274cf3;
   padding: 6px;
   color: #fff;
-  transition: all 0.3s linear;
 }
 .form__button._error {
   box-shadow: 0 0 2px 2px #ff0000;

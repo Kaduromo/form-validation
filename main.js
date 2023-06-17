@@ -1,30 +1,35 @@
-const data = {}
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".form")
+  const formButton = form.querySelector(".form__button")
+  const data = {}
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault()
+  formButton.addEventListener("click", () => {
+    form.addEventListener("submit", (e) => e.preventDefault())
 
-    alert(`Имя ${data.name}, Email ${data.email}`)
-    setTimeout(() => e.target.reset(), 2000)
+    if (data?.name?.length && data?.email?.length) {
+      formButton.classList.add("_success")
+      alert(`Имя ${data.name}, Email ${data.email}`)
+      form.reset()
+    } else {
+      formButton.classList.add("_error")
+      alert("Пожалуйста,заполните поля формы")
+    }
   })
 
   form.addEventListener("keyup", (e) => {
     e.preventDefault()
-    // const error = formValidate()
     formValidate()
   })
 
   function formValidate() {
     let error = 0
-    const formReq = document.querySelectorAll("._req")
+    const formReq = document.querySelectorAll("[data-req]")
 
     for (let index = 0; index < formReq.length; index++) {
       const input = formReq[index]
 
       formRemoveError(input)
-      input.classList.remove("_succsess")
+      input.classList.remove("_success")
 
       if (input.focus) {
         if (input.id === "name") {
@@ -32,15 +37,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (input.value.trim() === "") {
             addErrorMessage(input, "Имя обязательно для заполнения")
+            error++
           }
 
           if (minValue(input, 3)) {
-            addErrorMessage(input, "Имя должно состаять миниму из 3 символов")
+            addErrorMessage(input, "Имя должно состаять минимум из 3 символов")
+            error++
           }
 
           if (input.value.trim().length >= 3) {
             data.name = input.value
-            input.classList.add("_succsess")
+            input.classList.add("_success")
+            error = 0
           }
         }
 
@@ -53,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
               input,
               "Электронная почта обязательна для заполнения"
             )
+            error++
           }
 
           if (!emailRegExp) {
@@ -60,7 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
             error++
           } else {
             data.email = input.value
-            input.classList.add("_succsess")
+            input.classList.add("_success")
+            error = 0
           }
         }
 
@@ -72,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           if (input.value.trim() === "") {
             addErrorMessage(input, "Пароль обязателен для заполнения")
+            error++
           }
 
           if (!capitalRegExp) {
@@ -90,12 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
           if (minValue(input, 8)) {
             addErrorMessage(
               input,
-              "Пароль должен состаять миниму из 8 символов"
+              "Пароль должен состаять минимум из 8 символов"
             )
+            error++
           }
 
           if (input.value.trim().length >= 8 && capitalRegExp && digitRegExp) {
-            input.classList.add("_succsess")
+            input.classList.add("_success")
+            error = 0
           }
         }
       }
